@@ -61,4 +61,17 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	<property name="order" value="0"></property>
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView">
+		
+		</property>
+	</bean>
+	<bean id="tilesConfigure" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
 </beans>
