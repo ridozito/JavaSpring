@@ -1,0 +1,1 @@
+INSERT INTO role(ROLE_NAME,DESCRIPTION) VALUES ('admin','Admin of system') , ('staff','Staff of system')
