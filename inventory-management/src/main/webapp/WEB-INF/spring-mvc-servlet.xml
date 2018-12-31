@@ -77,4 +77,13 @@
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/message/message"></property>
 	</bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/processLogin"/>
+			<mvc:exclude-mapping path="/resouces/**"/>
+			<bean class="inventory.security.FilterSystem"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
