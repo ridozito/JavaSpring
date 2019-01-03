@@ -28,6 +28,7 @@ public class FilterSystem implements HandlerInterceptor{
 		if(users!=null) {
 			String url = request.getServletPath();
 			if(!hasPermission(url, users)) {
+				logger.error("ACCESS DENIED URI ="+request.getRequestURI());
 				response.sendRedirect(request.getContextPath()+"/access-denied");
 				return false;
 			}

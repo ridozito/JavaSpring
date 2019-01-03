@@ -1,9 +1,12 @@
 package inventory.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +34,8 @@ public class CategoryController {
 		if(binder.getTarget()==null) {
 			return;
 		}
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 		if(binder.getTarget().getClass()== Category.class) {
 			binder.setValidator(categoryValidator);
 		}
@@ -77,7 +82,16 @@ public class CategoryController {
 	@PostMapping("/category/save")
 	public String save(Model model,@ModelAttribute("modelForm") @Validated Category category,BindingResult result) {
 		if(result.hasErrors()) {
+			if(category.getId()!=null) {
+				model.addAttribute("titlePage", "Edit Category");
+			}else {
+				model.addAttribute("titlePage", "Add Category");
+			}
+			
+			model.addAttribute("modelForm", category);
+			model.addAttribute("viewOnly", false);
 			return "category-action";
+			
 		}
 		if(category.getId()!=null && category.getId()!=0) {
 			productService.updateCategory(category);

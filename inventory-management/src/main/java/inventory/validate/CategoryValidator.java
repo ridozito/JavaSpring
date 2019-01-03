@@ -29,7 +29,15 @@ public class CategoryValidator implements Validator{
 		if(category.getCode()!=null) {
 			List<Category> results=  productService.findCategory("code", category.getCode());
 			if(results!=null && !results.isEmpty() ) {
+			if(category.getId()!=null && category.getId()!=0) {
+				if( results.get(0).getId()!= category.getId()) {
+					errors.rejectValue("code", "msg.code.exist");
+				}
+			}else {
 				errors.rejectValue("code", "msg.code.exist");
+			}
+			
+				
 			}
 		}
 		
