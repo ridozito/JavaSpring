@@ -82,7 +82,7 @@
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/login"/>
 			<mvc:exclude-mapping path="/processLogin"/>
-			<mvc:exclude-mapping path="/resouces/**"/>
+			<mvc:exclude-mapping path="/resources/**"/>
 			<bean class="inventory.security.FilterSystem"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
