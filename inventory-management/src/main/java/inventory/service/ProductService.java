@@ -27,7 +27,7 @@ public class ProductService {
 		category.setUpdateDate(new Date());
 		categoryDAO.update(category);
 	}
-	public void deleteCategory(Category category) {
+	public void deleteCategory(Category category){
 		category.setActiveFlag(0);
 		category.setUpdateDate(new Date());
 		log.info("Delete category "+category.toString());
