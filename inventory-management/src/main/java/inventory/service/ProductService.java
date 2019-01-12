@@ -11,13 +11,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import inventory.dao.CategoryDAO;
+import inventory.dao.ProductInfoDAO;
 import inventory.model.Category;
 import inventory.model.Paging;
+import inventory.model.ProductInfo;
 
 @Service
 public class ProductService {
 	@Autowired
 	private CategoryDAO<Category> categoryDAO;
+	@Autowired
+	private ProductInfoDAO<ProductInfo> productInfoDAO;
 	private static final Logger log = Logger.getLogger(ProductService.class);
 	public void saveCategory(Category category)  throws Exception{
 		log.info("Insert category "+category.toString());
@@ -66,5 +70,57 @@ public class ProductService {
 		log.info("find category by id ="+id);
 		return categoryDAO.findById(Category.class, id);
 	}
+	
+	// PRODUCT INFO
+	
+	public void saveProductInfo(ProductInfo productInfo)  throws Exception{
+		log.info("Insert productInfo "+productInfo.toString());
+		productInfo.setActiveFlag(1);
+		productInfo.setCreateDate(new Date());
+		productInfo.setUpdateDate(new Date());
+		productInfo.setImgUrl("/upload/"+productInfo.getMultipartFile().getOriginalFilename());
+		productInfoDAO.save(productInfo);
+	}
+	public void updateProductInfo(ProductInfo productInfo) throws Exception {
+		log.info("Update productInfo "+productInfo.toString());
+		productInfo.setUpdateDate(new Date());
+		productInfoDAO.update(productInfo);
+	}
+	public void deleteProductInfo(ProductInfo productInfo) throws Exception{
+		productInfo.setActiveFlag(0);
+		productInfo.setUpdateDate(new Date());
+		log.info("Delete productInfo "+productInfo.toString());
+		productInfoDAO.update(productInfo);
+	}
+	public List<ProductInfo> findProductInfo(String property , Object value){
+		log.info("=====Find by property productInfo start====");
+		log.info("property ="+property +" value"+ value.toString());
+		return productInfoDAO.findByProperty(property, value);
+	}
+	public List<ProductInfo> getAllProductInfo(ProductInfo productInfo,Paging paging){
+		log.info("show all productInfo");
+		StringBuilder queryStr = new StringBuilder();
+		Map<String, Object> mapParams = new HashMap<>();
+		if(productInfo!=null) {
+			if(productInfo.getId()!=null && productInfo.getId()!=0) {
+				queryStr.append(" and model.id=:id");
+				mapParams.put("id", productInfo.getId());
+			}
+			if(productInfo.getCode()!=null && !StringUtils.isEmpty(productInfo.getCode())) {
+				queryStr.append(" and model.code=:code");
+				mapParams.put("code", productInfo.getCode());
+			}
+			if(productInfo.getName()!=null && !StringUtils.isEmpty(productInfo.getName()) ) {
+				queryStr.append(" and model.name like :name");
+				mapParams.put("name", "%"+productInfo.getName()+"%");
+			}
+		}
+		return productInfoDAO.findAll(queryStr.toString(), mapParams,paging);
+	}
+	public ProductInfo findByIdProductInfo(int id) {
+		log.info("find productInfo by id ="+id);
+		return productInfoDAO.findById(ProductInfo.class, id);
+	}
+	
 	
 }
