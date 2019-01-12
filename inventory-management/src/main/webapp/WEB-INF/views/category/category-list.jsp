@@ -17,31 +17,29 @@
 				<div class="x_content">
 					<a href="<c:url value="/category/add"/>" class="btn btn-app"><i class="fa fa-plus"></i>Add</a>
 					<div class="container" style="padding: 50px;">
-						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list" method="POST">
+						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list/1" method="POST">
 							<div class="form-group">
 								<label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">ID</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="id" cssClass="form-control col-md-7 col-xs-12"  />
+									<form:input path="id" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code 
-								</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="code" cssClass="form-control col-md-7 col-xs-12"  />
+									<form:input path="code" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name 
-								</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="name" cssClass="form-control col-md-7 col-xs-12"  />
+									<form:input path="name" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-										<button type="submit" class="btn btn-success">Search</button>
+									<button type="submit" class="btn btn-success">Search</button>
 								</div>
 							</div>
 
@@ -72,7 +70,7 @@
 											<tr class="odd pointer">
 										</c:otherwise>
 									</c:choose>
-									<td class=" ">${loop.index+1}</td>
+									<td class=" ">${pageInfo.getOffset()+loop.index+1}</td>
 									<td class=" ">${category.id }</td>
 									<td class=" ">${category.code }</td>
 									<td class=" ">${category.name }</td>
@@ -85,9 +83,8 @@
 
 							</tbody>
 						</table>
+						<jsp:include page="../layout/paging.jsp"></jsp:include>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -98,6 +95,10 @@
 		 if(confirm('Do you want delete this record?')){
 			 window.location.href = '<c:url value="/category/delete/"/>'+id;
 		 }
+	 }
+	 function gotoPage(page){
+		 $('#searchForm').attr('action','<c:url value="/category/list/"/>'+page);
+		 $('#searchForm').submit();
 	 }
 	 $(document).ready(function(){
 		 processMessage();

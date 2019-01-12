@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import inventory.model.Category;
+import inventory.model.Paging;
 import inventory.service.ProductService;
 import inventory.util.Constant;
 import inventory.validate.CategoryValidator;
@@ -44,11 +45,17 @@ public class CategoryController {
 			binder.setValidator(categoryValidator);
 		}
 	}
+	@RequestMapping(value= {"/category/list","/category/list/"})
 	
-	@RequestMapping(value="/category/list")
-	public String showCategoryList(Model model,HttpSession session , @ModelAttribute("searchForm") Category category) {
-		
-		List<Category> categories = productService.getAllCategory(category);
+	public String redirect() {
+		return "redirect:/category/list/1";
+	}
+	
+	@RequestMapping(value="/category/list/{page}")
+	public String showCategoryList(Model model,HttpSession session , @ModelAttribute("searchForm") Category category,@PathVariable("page") int page) {
+		Paging paging = new Paging(1);
+		paging.setIndexPage(page);
+		List<Category> categories = productService.getAllCategory(category,paging);
 		if(session.getAttribute(Constant.MSG_SUCCESS)!=null ) {
 			model.addAttribute(Constant.MSG_SUCCESS, session.getAttribute(Constant.MSG_SUCCESS));
 			session.removeAttribute(Constant.MSG_SUCCESS);
@@ -57,7 +64,7 @@ public class CategoryController {
 			model.addAttribute(Constant.MSG_ERROR, session.getAttribute(Constant.MSG_ERROR));
 			session.removeAttribute(Constant.MSG_ERROR);
 		}
-		
+		model.addAttribute("pageInfo", paging);
 		model.addAttribute("categories", categories);
 		return "category-list";
 		

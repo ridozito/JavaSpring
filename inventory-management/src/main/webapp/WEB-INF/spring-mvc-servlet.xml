@@ -11,7 +11,7 @@
 	<context:component-scan base-package="inventory"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:resources location="/static/"
-		mapping="/resources/**" cache-period="31556926"></mvc:resources>
+		mapping="/resources/**"></mvc:resources>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="1" />
