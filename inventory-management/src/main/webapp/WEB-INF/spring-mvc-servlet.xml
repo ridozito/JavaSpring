@@ -12,6 +12,8 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:resources location="/static/"
 		mapping="/resources/**"></mvc:resources>
+	<mvc:resources
+		location="file:/${upload.servlet.location}" mapping="/upload/**"></mvc:resources>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="1" />
@@ -24,8 +26,12 @@
 	</bean>
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>classpath:jdbc.properties</value>
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:config.properties</value>
+			</list>
+
 		</property>
 	</bean>
 	<bean id="dataSource"
@@ -36,9 +42,11 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="hibernateProperties" value="classpath:hibernate.properties"></property>
+		<property name="hibernateProperties"
+			value="classpath:hibernate.properties"></property>
 		<property name="mappingResources">
 			<list>
 				<value>inventory/model/mapping/Auth.hbm.xml</value>
@@ -52,7 +60,7 @@
 				<value>inventory/model/mapping/UserRole.hbm.xml</value>
 				<value>inventory/model/mapping/Users.hbm.xml</value>
 			</list>
-		
+
 		</property>
 	</bean>
 	<tx:annotation-driven
@@ -61,28 +69,32 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-	<property name="order" value="0"></property>
-		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView">
-		
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="order" value="0"></property>
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView">
+
 		</property>
 	</bean>
-	<bean id="tilesConfigure" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	<bean id="tilesConfigure"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/tiles.xml</value>
 			</list>
 		</property>
 	</bean>
-	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/message/message"></property>
 	</bean>
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/login"/>
-			<mvc:exclude-mapping path="/processLogin"/>
-			<mvc:exclude-mapping path="/resources/**"/>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/login" />
+			<mvc:exclude-mapping path="/processLogin" />
+			<mvc:exclude-mapping path="/resources/**" />
 			<bean class="inventory.security.FilterSystem"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

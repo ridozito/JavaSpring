@@ -1,6 +1,7 @@
 insert into menu(parent_id,url,name,order_index) values (0,'/product','Sản phẩm',1),
 (0,'/stock','Kho',2),
 (0,'/management','Quản lý',3),
+
 (1,'/product-info/list','Danh sách sản phẩm',2),
 (1,'/category/list','Danh sách category',1),
 (1,'/category/edit','Sửa',-1),
@@ -8,6 +9,12 @@ insert into menu(parent_id,url,name,order_index) values (0,'/product','Sản ph�
 (1,'/category/add','Thêm mới',-1),
 (1,'/category/save','Lưu',-1),
 (1,'/category/delete','Xoá',-1),
+
+(1,'/product-info/edit','Sửa',-1),
+(1,'/product-info/view','Xem',-1),
+(1,'/product-info/add','Thêm mới',-1),
+(1,'/product-info/save','Lưu',-1),
+(1,'/product-info/delete','Xoá',-1),
 
 (2,'/goods-recept/list','Danh sách nhập kho',1),
 (2,'/goods-issue/list','Danh sách xuất kho',2),
