@@ -24,13 +24,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import inventory.model.ProductInfo;
 import inventory.model.Category;
 import inventory.model.Paging;
 import inventory.service.ProductService;
-import inventory.util.ConfigLoader;
 import inventory.util.Constant;
 import inventory.validate.ProductInfoValidator;
 
@@ -100,6 +98,7 @@ public class ProductInfoController {
 			for(Category category : categories) {
 				mapCategory.put(String.valueOf(category.getId()), category.getName());
 			}
+			productInfo.setCateId(productInfo.getCategory().getId());
 			model.addAttribute("mapCategory", mapCategory);
 			model.addAttribute("titlePage", "Edit ProductInfo");
 			model.addAttribute("modelForm", productInfo);
@@ -139,7 +138,9 @@ public class ProductInfoController {
 			return "productInfo-action";
 			
 		}
-		
+		Category category = new Category();
+		category.setId(productInfo.getCateId());
+		productInfo.setCategory(category);
 		if(productInfo.getId()!=null && productInfo.getId()!=0) {
 			try {
 				

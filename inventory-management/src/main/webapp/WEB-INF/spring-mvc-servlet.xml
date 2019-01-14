@@ -89,12 +89,18 @@
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/message/message"></property>
 	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="268435456" />
+	</bean>
+	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/login" />
 			<mvc:exclude-mapping path="/processLogin" />
 			<mvc:exclude-mapping path="/resources/**" />
+			<mvc:exclude-mapping path="/upload/**"/>
 			<bean class="inventory.security.FilterSystem"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
