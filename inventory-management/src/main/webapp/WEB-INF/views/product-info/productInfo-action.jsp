@@ -104,11 +104,11 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				$('#productinfolistId').addClass('current-page').siblings()
+				$('#product-infolistId').addClass('current-page').siblings()
 						.removeClass('current-page');
-				var parent = $('#productinfolistId').parents('li');
+				var parent = $('#product-infolistId').parents('li');
 				parent.addClass('active').siblings().removeClass('active');
-				$('#productinfolistId').parents().show();
+				$('#product-infolistId').parents().show();
 			});
 	function cancel() {
 		window.location.href = '<c:url value="/product-info/list"/>'
