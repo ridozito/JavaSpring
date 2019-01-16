@@ -8,16 +8,16 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-					<h2>Category List</h2>
+					<h2>Product Info List</h2>
 
 					<div class="clearfix"></div>
 				</div>
 
 
 				<div class="x_content">
-					<a href="<c:url value="/category/add"/>" class="btn btn-app"><i class="fa fa-plus"></i>Add</a>
+					<a href="<c:url value="/product-info/add"/>" class="btn btn-app"><i class="fa fa-plus"></i>Add</a>
 					<div class="container" style="padding: 50px;">
-						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/category/list/1" method="POST">
+						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/product-info/list/1" method="POST">
 							<div class="form-group">
 								<label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">ID</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
@@ -54,13 +54,13 @@
 									<th class="column-title">Id</th>
 									<th class="column-title">Code</th>
 									<th class="column-title">Name</th>
-									<th class="column-title">Description</th>
+									<th class="column-title">Image</th>
 									<th class="column-title no-link last text-center" colspan="3"><span class="nobr">Action</span></th>
 								</tr>
 							</thead>
 
 							<tbody>
-								<c:forEach items="${categories}" var="category" varStatus="loop">
+								<c:forEach items="${products}" var="product" varStatus="loop">
 
 									<c:choose>
 										<c:when test="${loop.index%2==0 }">
@@ -71,13 +71,13 @@
 										</c:otherwise>
 									</c:choose>
 									<td class=" ">${pageInfo.getOffset()+loop.index+1}</td>
-									<td class=" ">${category.id }</td>
-									<td class=" ">${category.code }</td>
-									<td class=" ">${category.name }</td>
-									<td class=" ">${category.description }</td>
-									<td class="text-center"><a href="<c:url value="/category/view/${category.id }"/>" class="btn btn-round btn-default">View</a></td>
-									<td class="text-center"><a href="<c:url value="/category/edit/${category.id }"/>" class="btn btn-round btn-primary">Edit</a></td>
-									<td class="text-center"><a href="javascript:void(0);" onclick="confirmDelete(${category.id});" class="btn btn-round btn-danger">Delete</a></td>
+									<td class=" ">${product.id }</td>
+									<td class=" ">${product.code }</td>
+									<td class=" ">${product.name }</td>
+									<td class=" "><img src="<c:url value="${product.imgUrl}"/>" width="100px" height="100px"/></td>
+									<td class="text-center"><a href="<c:url value="/product-info/view/${product.id }"/>" class="btn btn-round btn-default">View</a></td>
+									<td class="text-center"><a href="<c:url value="/product-info/edit/${product.id }"/>" class="btn btn-round btn-primary">Edit</a></td>
+									<td class="text-center"><a href="javascript:void(0);" onclick="confirmDelete(${product.id});" class="btn btn-round btn-danger">Delete</a></td>
 									</tr>
 								</c:forEach>
 
@@ -93,11 +93,11 @@
 <script type="text/javascript">
 	 function confirmDelete(id){
 		 if(confirm('Do you want delete this record?')){
-			 window.location.href = '<c:url value="/category/delete/"/>'+id;
+			 window.location.href = '<c:url value="/product-info/delete/"/>'+id;
 		 }
 	 }
 	 function gotoPage(page){
-		 $('#searchForm').attr('action','<c:url value="/category/list/"/>'+page);
+		 $('#searchForm').attr('action','<c:url value="/product-info/list/"/>'+page);
 		 $('#searchForm').submit();
 	 }
 	 $(document).ready(function(){
