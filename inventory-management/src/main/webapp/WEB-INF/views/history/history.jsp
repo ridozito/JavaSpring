@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div class="right_col" role="main">
@@ -17,36 +16,27 @@
 
 				<div class="x_content">
 					<div class="container" style="padding: 50px;">
-						<form:form modelAttribute="searchForm"
-							cssClass="form-horizontal form-label-left"
-							servletRelativeAction="/product-in-stock/list/1" method="POST">
+						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/product-in-stock/list/1" method="POST">
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="code">Code </label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="productInfo.code"
-										cssClass="form-control col-md-7 col-xs-12" />
+									<form:input path="productInfo.code" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="code">Category</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Category</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="productInfo.category.name"
-										cssClass="form-control col-md-7 col-xs-12" />
+									<form:input path="productInfo.category.name" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">Action </label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Action </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="actionName"
-										cssClass="form-control col-md-7 col-xs-12" />	
+									<form:input path="actionName" cssClass="form-control col-md-7 col-xs-12" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">Type </label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Type </label>
 
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:select path="type" cssClass="form-control">

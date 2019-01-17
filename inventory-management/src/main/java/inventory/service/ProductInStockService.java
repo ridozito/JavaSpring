@@ -13,7 +13,6 @@ import org.springframework.util.StringUtils;
 import inventory.dao.ProductInStockDAO;
 import inventory.model.ProductInStock;
 import inventory.model.ProductInfo;
-import inventory.util.Constant;
 import inventory.model.Invoice;
 import inventory.model.Paging;
 
