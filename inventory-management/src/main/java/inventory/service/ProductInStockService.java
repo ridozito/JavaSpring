@@ -29,8 +29,8 @@ public class ProductInStockService {
 		Map<String, Object> mapParams = new HashMap<>();
 		if(productInStock!=null) {
 			if(productInStock.getId()!=null && productInStock.getId()!=0) {
-				queryStr.append(" and model.id=:id");
-				mapParams.put("id", productInStock.getId());
+				queryStr.append(" and model.productInfo.category.name like :cateName");
+				mapParams.put("cateName","%"+productInStock.getProductInfo().getCategory().getName()+"%");
 			}
 			if(productInStock.getProductInfo().getCode()!=null && !StringUtils.isEmpty(productInStock.getProductInfo().getCode())) {
 				queryStr.append(" and model.productInfo.code=:code");
