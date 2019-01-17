@@ -35,4 +35,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/product-info/productInfo-list.jsp"></put-attribute>
 	</definition>
+	<definition name="product-in-stock" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/product-in-stock/product-in-stock.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
