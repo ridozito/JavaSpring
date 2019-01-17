@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import inventory.dao.ProductInStockDAO;
 import inventory.model.ProductInStock;
 import inventory.model.ProductInfo;
+import inventory.util.Constant;
 import inventory.model.Invoice;
 import inventory.model.Paging;
 
@@ -27,8 +28,8 @@ public class ProductInStockService {
 		log.info("show all productInStock");
 		StringBuilder queryStr = new StringBuilder();
 		Map<String, Object> mapParams = new HashMap<>();
-		if(productInStock!=null) {
-			if(productInStock.getId()!=null && productInStock.getId()!=0) {
+		if(productInStock!=null && productInStock.getProductInfo()!=null) {
+			if(!StringUtils.isEmpty(productInStock.getProductInfo().getCategory().getName())) {
 				queryStr.append(" and model.productInfo.category.name like :cateName");
 				mapParams.put("cateName","%"+productInStock.getProductInfo().getCategory().getName()+"%");
 			}
@@ -52,11 +53,15 @@ public class ProductInStockService {
 			if(product!=null) {
 				log.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
 				product.setQty(product.getQty()+invoice.getQty());
-				product.setPrice(invoice.getPrice());
+				// type =1 receipt , type =2 issues
+				if(invoice.getType()==1) {
+					product.setPrice(invoice.getPrice());
+				}
+				
 				product.setUpdateDate(new Date());
 				productInStockDAO.update(product);
 			
-			}else {
+			}else if(invoice.getType()==1){
 				log.info("insert to stock qty="+invoice.getQty()+" and price="+invoice.getPrice());
 				product = new ProductInStock();
 				ProductInfo productInfo = new ProductInfo();
