@@ -28,15 +28,15 @@ public class ProductInStockService {
 		StringBuilder queryStr = new StringBuilder();
 		Map<String, Object> mapParams = new HashMap<>();
 		if(productInStock!=null) {
-			if(productInStock.getId()!=null && productInStock.getId()!=0) {
+			if(!StringUtils.isEmpty(productInStock.getProductInfo().getCategory().getName()) ) {
 				queryStr.append(" and model.productInfo.category.name like :cateName");
 				mapParams.put("cateName","%"+productInStock.getProductInfo().getCategory().getName()+"%");
 			}
-			if(productInStock.getProductInfo().getCode()!=null && !StringUtils.isEmpty(productInStock.getProductInfo().getCode())) {
+			if(!StringUtils.isEmpty(productInStock.getProductInfo().getCode())) {
 				queryStr.append(" and model.productInfo.code=:code");
 				mapParams.put("code", productInStock.getProductInfo().getCode());
 			}
-			if(productInStock.getProductInfo().getName()!=null && !StringUtils.isEmpty(productInStock.getProductInfo().getName()) ) {
+			if( !StringUtils.isEmpty(productInStock.getProductInfo().getName()) ) {
 				queryStr.append(" and model.productInfo.name like :name");
 				mapParams.put("name", "%"+productInStock.getProductInfo().getName()+"%");
 			}

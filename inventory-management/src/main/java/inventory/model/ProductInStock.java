@@ -83,5 +83,6 @@ public class ProductInStock implements java.io.Serializable {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
 
 }

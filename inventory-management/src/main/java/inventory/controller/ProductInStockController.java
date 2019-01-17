@@ -34,4 +34,5 @@ public class ProductInStockController {
 		model.addAttribute("pageInfo", paging);
 		return "product-in-stock";
 	}
+	
 }
