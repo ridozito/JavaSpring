@@ -19,7 +19,7 @@ insert into menu(parent_id,url,name,order_index) values (0,'/product','Sản ph�
 (2,'/goods-recept/list','Danh sách nhập kho',1),
 (2,'/goods-issue/list','Danh sách xuất kho',2),
 (2,'/product-in-stock/list','Sản phẩm trong kho',3),
-(2,'/history','Lịch sử kho',4),
+(2,'/history/list','Lịch sử kho',4),
 
 (3,'/user/list','Danh sách user',1),
 (3,'/menu/list','Danh sách menu',1),
