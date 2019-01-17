@@ -12,6 +12,9 @@
         <property generated="never" lazy="false" name="qty" optimistic-lock="true" type="int" unique="false">
             <column name="QTY" not-null="true"/>
         </property>
+         <property generated="never" lazy="false" name="price" optimistic-lock="true" type="big_decimal" unique="false">
+            <column name="PRICE" not-null="true" precision="15"/>
+        </property>
         <property generated="never" lazy="false" name="activeFlag" optimistic-lock="true" type="int" unique="false">
             <column name="ACTIVE_FLAG" not-null="true"/>
         </property>
