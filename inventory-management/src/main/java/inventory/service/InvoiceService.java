@@ -62,6 +62,14 @@ public class InvoiceService {
 				queryStr.append(" and model.code =:code ");
 				mapParams.put("code", invoice.getCode());
 			}
+			if(invoice.getFromDate()!=null) {
+				queryStr.append(" and model.updateDate >= :fromDate");
+				mapParams.put("fromDate", invoice.getFromDate());
+			}
+			if(invoice.getToDate()!=null) {
+				queryStr.append(" and model.updateDate <= :toDate");
+				mapParams.put("toDate", invoice.getToDate());
+			}
 		}
 		return invoiceDAO.findAll(queryStr.toString(), mapParams, paging);
 
