@@ -16,7 +16,7 @@
 
 				<div class="x_content">
 					<div class="container" style="padding: 50px;">
-						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/product-in-stock/list/1" method="POST">
+						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/history/list/1" method="POST">
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
@@ -95,7 +95,7 @@
 											<td>Goods Issues</td>
 										</c:otherwise>
 									</c:choose>
-									<td>${histoy.actionName}</td>
+									<td>${history.actionName}</td>
 									</tr>
 								</c:forEach>
 

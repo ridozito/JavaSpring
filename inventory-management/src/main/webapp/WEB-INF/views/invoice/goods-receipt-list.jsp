@@ -15,8 +15,6 @@
 
 					<div class="clearfix"></div>
 				</div>
-
-
 				<div class="x_content">
 					<a href="<c:url value="/goods-receipt/add"/>" class="btn btn-app"><i class="fa fa-plus"></i>Add</a>
 					<div class="container" style="padding: 50px;">

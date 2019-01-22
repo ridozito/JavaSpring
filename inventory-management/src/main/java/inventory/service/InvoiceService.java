@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import inventory.dao.InvoiceDAO;
 import inventory.model.Invoice;
 import inventory.model.Paging;
+import inventory.model.ProductInfo;
 import inventory.util.Constant;
 
 @Service
@@ -26,6 +27,9 @@ public class InvoiceService {
 	static final Logger log = Logger.getLogger(InvoiceService.class);
 
 	public void save(Invoice invoice) throws Exception {
+		ProductInfo productInfo = new ProductInfo();
+		productInfo.setId(invoice.getProductId());
+		invoice.setProductInfo(productInfo);
 		invoice.setActiveFlag(1);
 		invoice.setCreateDate(new Date());
 		invoice.setUpdateDate(new Date());
@@ -36,6 +40,9 @@ public class InvoiceService {
 
 	public void update(Invoice invoice) throws Exception {
 		int originQty = invoiceDAO.findById(Invoice.class, invoice.getId()).getQty();
+		ProductInfo productInfo = new ProductInfo();
+		productInfo.setId(invoice.getProductId());
+		invoice.setProductInfo(productInfo);
 		invoice.setUpdateDate(new Date());
 		Invoice invoice2 = new Invoice();
 		invoice2.setProductInfo(invoice.getProductInfo());
@@ -43,6 +50,7 @@ public class InvoiceService {
 		invoice2.setPrice(invoice.getPrice());
 		invoiceDAO.update(invoice);
 		historyService.save(invoice, Constant.ACTION_EDIT);
+		productInStockService.saveOrUpdate(invoice2);
 		
 	}
 

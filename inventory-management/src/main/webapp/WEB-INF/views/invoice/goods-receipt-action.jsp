@@ -19,6 +19,7 @@
 							<form:hidden path="id" />
 							<form:hidden path="createDate" />
 							<form:hidden path="activeFlag" />
+							
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Code <span class="required">*</span>
 								</label>
@@ -52,7 +53,7 @@
 
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Qty <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="qty">Qty <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<form:input path="qty" cssClass="form-control col-md-7 col-xs-12" disabled="${viewOnly}" />

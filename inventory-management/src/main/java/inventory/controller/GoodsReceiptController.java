@@ -59,7 +59,7 @@ public class GoodsReceiptController {
 	
 	@RequestMapping(value="/goods-receipt/list/{page}")
 	public String showInvoiceList(Model model,HttpSession session , @ModelAttribute("searchForm") Invoice invoice,@PathVariable("page") int page) {
-		Paging paging = new Paging(1);
+		Paging paging = new Paging(5);
 		paging.setIndexPage(page);
 		if(invoice==null) {
 			invoice = new Invoice();

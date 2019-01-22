@@ -48,16 +48,17 @@ public class ProductInStockService {
 	public void saveOrUpdate(Invoice invoice) throws Exception{
 		log.info("product in stock ");
 		if(invoice.getProductInfo()!=null) {
-			String code = invoice.getProductInfo().getCode();
-			ProductInStock product = productInStockDAO.findByProperty("productInfo.code", code).get(0);
-			if(product!=null) {
+			int id = invoice.getProductInfo().getId();
+			List<ProductInStock>  products= productInStockDAO.findByProperty("productInfo.id", id);
+			ProductInStock product=null;
+			if(products!=null && !products.isEmpty()) {
+				product = products.get(0);
 				log.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
 				product.setQty(product.getQty()+invoice.getQty());
 				// type =1 receipt , type =2 issues
 				if(invoice.getType()==1) {
 					product.setPrice(invoice.getPrice());
 				}
-				
 				product.setUpdateDate(new Date());
 				productInStockDAO.update(product);
 			
