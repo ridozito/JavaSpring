@@ -1,3 +1,4 @@
+
 package inventory.model;
 // Generated Dec 26, 2018 6:59:18 PM by Hibernate Tools 5.1.10.Final
 
@@ -18,8 +19,8 @@ public class Invoice implements java.io.Serializable {
 	private int activeFlag;
 	private Date createDate;
 	private Date updateDate;
-	private Date toDate;
 	private Date fromDate;
+	private Date toDate;
 
 	public Invoice() {
 	}
@@ -108,14 +109,6 @@ public class Invoice implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Date getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
-
 	public Date getFromDate() {
 		return fromDate;
 	}
@@ -123,6 +116,15 @@ public class Invoice implements java.io.Serializable {
 	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
 	
 
 }
+

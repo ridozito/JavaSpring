@@ -28,8 +28,6 @@ public class InvoiceValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Invoice invoice = (Invoice) target;
 		ValidationUtils.rejectIfEmpty(errors, "code", "msg.required");
-		ValidationUtils.rejectIfEmpty(errors, "name", "msg.required");
-		ValidationUtils.rejectIfEmpty(errors, "description", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "qty", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "price", "msg.required");
 		if (invoice.getCode() != null) {

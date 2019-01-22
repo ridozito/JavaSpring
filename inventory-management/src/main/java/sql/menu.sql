@@ -16,7 +16,12 @@ insert into menu(parent_id,url,name,order_index) values (0,'/product','Sản ph�
 (1,'/product-info/save','Lưu',-1),
 (1,'/product-info/delete','Xoá',-1),
 
-(2,'/goods-recept/list','Danh sách nhập kho',1),
+(2,'/goods-receipt/list','Danh sách nhập kho',1),
+(2,'/goods-receipt/view','Xem',-1),
+(2,'/goods-receipt/add','Thêm mới',-1),
+(2,'/goods-receipt/save','Lưu',-1),
+(2,'/goods-receipt/export','Xuất báo cáo',-1),
+
 (2,'/goods-issue/list','Danh sách xuất kho',2),
 (2,'/product-in-stock/list','Sản phẩm trong kho',3),
 (2,'/history/list','Lịch sử kho',4),

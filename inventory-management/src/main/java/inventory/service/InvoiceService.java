@@ -43,6 +43,7 @@ public class InvoiceService {
 		invoice2.setPrice(invoice.getPrice());
 		invoiceDAO.update(invoice);
 		historyService.save(invoice, Constant.ACTION_EDIT);
+		productInStockService.saveOrUpdate(invoice2);
 		
 	}
 
