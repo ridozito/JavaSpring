@@ -2,7 +2,9 @@ package inventory.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import inventory.model.Invoice;
 import inventory.model.Paging;
+import inventory.model.ProductInfo;
 import inventory.service.InvoiceService;
+import inventory.service.ProductService;
 import inventory.util.Constant;
 import inventory.validate.InvoiceValidator;
 
@@ -33,6 +37,8 @@ public class GoodsReceiptController {
 	private InvoiceService invoiceService;
 	@Autowired
 	private InvoiceValidator invoiceValidator;
+	@Autowired
+	private ProductService productService;
 	static final Logger log = Logger.getLogger(GoodsReceiptController.class);
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
@@ -78,6 +84,7 @@ public class GoodsReceiptController {
 		model.addAttribute("titlePage", "Add Invoice");
 		model.addAttribute("modelForm", new Invoice());
 		model.addAttribute("viewOnly", false);
+		model.addAttribute("mapProduct", initMapProduct());
 		return "goods-receipt-action";
 	}
 	@GetMapping("/goods-receipt/edit/{id}")
@@ -88,6 +95,7 @@ public class GoodsReceiptController {
 			model.addAttribute("titlePage", "Edit Invoice");
 			model.addAttribute("modelForm", invoice);
 			model.addAttribute("viewOnly", false);
+			model.addAttribute("mapProduct", initMapProduct());
 			return "goods-receipt-action";
 		}
 		return "redirect:/goods-receipt/list";
@@ -112,7 +120,7 @@ public class GoodsReceiptController {
 			}else {
 				model.addAttribute("titlePage", "Add Invoice");
 			}
-			
+			model.addAttribute("mapProduct", initMapProduct());
 			model.addAttribute("modelForm", invoice);
 			model.addAttribute("viewOnly", false);
 			return "goods-receipt-action";
@@ -142,5 +150,13 @@ public class GoodsReceiptController {
 		}
 		return "redirect:/goods-receipt/list";
 		
+	}
+	private Map<String,String> initMapProduct(){
+		List<ProductInfo> productInfos = productService.getAllProductInfo(null, null);
+		Map<String, String> mapProduct = new HashMap<>();
+		for(ProductInfo productInfo : productInfos) {
+			mapProduct.put(productInfo.getId().toString(),productInfo.getName());
+		}
+		return mapProduct;
 	}
 }
