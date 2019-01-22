@@ -20,6 +20,7 @@ public class Invoice implements java.io.Serializable {
 	private Date updateDate;
 	private Date toDate;
 	private Date fromDate;
+	private Integer productId;
 
 	public Invoice() {
 	}
@@ -123,6 +124,15 @@ public class Invoice implements java.io.Serializable {
 	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+	
 	
 
 }

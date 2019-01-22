@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<style>
+</style>
 <div class="right_col" role="main">
 	<div class="">
 
@@ -64,6 +67,7 @@
 									<th class="column-title">Code</th>
 									<th class="column-title">Qty</th>
 									<th class="column-title">Price</th>
+									<th class="column-title">Product </th>
 									<th class="column-title">Update Date</th>
 									<th class="column-title no-link last text-center" colspan="3"><span class="nobr">Action</span></th>
 								</tr>
@@ -83,8 +87,10 @@
 									<td class=" ">${pageInfo.getOffset()+loop.index+1}</td>
 									<td class=" ">${invoice.code }</td>
 									<td class=" ">${invoice.qty }</td>
-									<td class=" ">${invoice.price }</td>
-									<td class=" ">${invoice.updateDate}</td>
+									<td class="price">${invoice.price }</td>
+									<td class=" ">${invoice.productInfo.name }</td>
+									<td class="date">${invoice.updateDate}</td>
+									
 									<td class="text-center"><a href="<c:url value="/goods-receipt/view/${invoice.id }"/>" class="btn btn-round btn-default">View</a></td>
 									<td class="text-center"><a href="<c:url value="/goods-receipt/edit/${invoice.id }"/>" class="btn btn-round btn-primary">Edit</a></td>
 									<td class="text-center"><a href="javascript:void(0);" onclick="confirmDelete(${invoice.id});" class="btn btn-round btn-danger">Delete</a></td>
@@ -118,6 +124,9 @@
 		 $('#toDatePicker').datetimepicker({
 			 format : 'YYYY-MM-DD HH:mm:ss'
 		 })
+		  $('.price').each(function(){
+			 $(this).text(numeral($(this).text()).format('0,0'));
+		 }) 
 	 });
 	 function processMessage(){
 		 var msgSuccess = '${msgSuccess}';
