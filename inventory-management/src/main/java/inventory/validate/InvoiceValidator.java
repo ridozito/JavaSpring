@@ -12,10 +12,12 @@ import org.springframework.validation.Validator;
 import inventory.model.Category;
 import inventory.model.Invoice;
 import inventory.service.InvoiceService;
+
 @Component
-public class InvoiceValidator implements Validator{
+public class InvoiceValidator implements Validator {
 	@Autowired
 	private InvoiceService invoiceService;
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
@@ -30,26 +32,30 @@ public class InvoiceValidator implements Validator{
 		ValidationUtils.rejectIfEmpty(errors, "description", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "qty", "msg.required");
 		ValidationUtils.rejectIfEmpty(errors, "price", "msg.required");
-		if(invoice.getCode()!=null) {
-			List<Invoice> results=  invoiceService.find("code", invoice.getCode());
-			if(results!=null && !results.isEmpty() ) {
-			if(invoice.getId()!=null && invoice.getId()!=0) {
-				if( results.get(0).getId()!= invoice.getId()) {
+		if (invoice.getCode() != null) {
+			List<Invoice> results = invoiceService.find("code", invoice.getCode());
+			if (results != null && !results.isEmpty()) {
+				if (invoice.getId() != null && invoice.getId() != 0) {
+					if (results.get(0).getId() != invoice.getId()) {
+						errors.rejectValue("code", "msg.code.exist");
+					}
+				} else {
 					errors.rejectValue("code", "msg.code.exist");
 				}
-			}else {
-				errors.rejectValue("code", "msg.code.exist");
-			}
 			}
 		}
-		if(invoice.getQty()<=0) {
+		if (invoice.getQty() <= 0) {
 			errors.rejectValue("qty", "msg.wrong.format");
 		}
-		if(invoice.getPrice().compareTo(BigDecimal.ZERO) <=0) {
+		if (invoice.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
 			errors.rejectValue("price", "msg.wrong.format");
 		}
-		
+		if (invoice.getFromDate() != null && invoice.getToDate() != null) {
+			if (invoice.getFromDate().after(invoice.getToDate())) {
+				errors.rejectValue("fromDate", "msg.wrong.date");
+			}
+		}
+
 	}
-	
 
 }
