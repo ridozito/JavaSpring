@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import inventory.model.Invoice;
 import inventory.model.Paging;
 import inventory.model.ProductInfo;
+import inventory.service.GoodsReceiptReport;
 import inventory.service.InvoiceService;
 import inventory.service.ProductService;
 import inventory.util.Constant;
@@ -151,12 +153,25 @@ public class GoodsReceiptController {
 		return "redirect:/goods-receipt/list";
 		
 	}
+	@GetMapping("/goods-receipt/export")
+	public ModelAndView exportReport() {
+		ModelAndView modelAndView = new ModelAndView();
+		Invoice invoice = new Invoice();
+		invoice.setType(Constant.TYPE_GOODS_RECEIPT);
+		List<Invoice> invoices = invoiceService.getList(invoice, null);
+		modelAndView.addObject(Constant.KEY_GOODS_RECEIPT_REPORT, invoices);
+		modelAndView.setView(new GoodsReceiptReport());
+		return modelAndView;
+	}
+	
+
 	private Map<String,String> initMapProduct(){
 		List<ProductInfo> productInfos = productService.getAllProductInfo(null, null);
 		Map<String, String> mapProduct = new HashMap<>();
 		for(ProductInfo productInfo : productInfos) {
 			mapProduct.put(productInfo.getId().toString(),productInfo.getName());
 		}
+		
 		return mapProduct;
 	}
 }
