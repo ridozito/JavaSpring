@@ -35,6 +35,7 @@ public class InvoiceService {
 		invoice.setUpdateDate(new Date());
 		invoiceDAO.save(invoice);
 		historyService.save(invoice, Constant.ACTION_ADD);
+		
 		productInStockService.saveOrUpdate(invoice);
 	}
 

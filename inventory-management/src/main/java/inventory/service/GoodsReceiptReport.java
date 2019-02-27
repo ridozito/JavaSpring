@@ -21,7 +21,8 @@ public class GoodsReceiptReport extends AbstractXlsxView{
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		response.setHeader("Content-Disposition", "attachment;filename=\"goods-receipt-export.xlsx\"");
+		String fileName = "invoice-export-"+System.currentTimeMillis()+".xlsx";
+		response.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\"");
 		Sheet sheet = workbook.createSheet("data");
 		Row header = sheet.createRow(0);
 		header.createCell(0).setCellValue("#");
