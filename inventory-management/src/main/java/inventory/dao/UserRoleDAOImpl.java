@@ -3,9 +3,10 @@ package inventory.dao;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import inventory.model.Category;
+import inventory.model.UserRole;
+import inventory.model.Users;
 @Repository
 @Transactional(rollbackFor=Exception.class)
-public class CategoryDAOImpl extends BaseDAOImpl<Category> implements CategoryDAO<Category>{
+public class UserRoleDAOImpl extends BaseDAOImpl<UserRole>  implements UserRoleDAO<UserRole>{
 
 }

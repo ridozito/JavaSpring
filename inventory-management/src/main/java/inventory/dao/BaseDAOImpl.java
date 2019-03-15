@@ -73,6 +73,12 @@ public class BaseDAOImpl<E> implements BaseDAO<E>{
 		log.info("update");
 		sessionFactory.getCurrentSession().merge(instance);
 	}
+	@Override
+	public int insert(E instance) {
+		log.info(" save instance");
+		Integer id = (Integer) sessionFactory.getCurrentSession().save(instance);
+		return id;
+	}
 	//
 	public String getGenericName() {
 		String s = getClass().getGenericSuperclass().toString();
