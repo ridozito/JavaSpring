@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import inventory.model.Invoice;
 import inventory.model.Paging;
 import inventory.model.ProductInfo;
-import inventory.service.GoodsReceiptReport;
+import inventory.service.InvoiceReport;
 import inventory.service.InvoiceService;
 import inventory.service.ProductService;
 import inventory.util.Constant;
@@ -161,7 +161,7 @@ public class GoodsIssueController {
 		invoice.setType(Constant.TYPE_GOODS_ISSUES);
 		List<Invoice> invoices = invoiceService.getList(invoice, null);
 		modelAndView.addObject(Constant.KEY_GOODS_RECEIPT_REPORT, invoices);
-		modelAndView.setView(new GoodsReceiptReport());
+		modelAndView.setView(new InvoiceReport());
 		return modelAndView;
 	}
 	

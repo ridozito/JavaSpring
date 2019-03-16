@@ -47,7 +47,7 @@ public class InvoiceService {
 		invoice.setUpdateDate(new Date());
 		Invoice invoice2 = new Invoice();
 		invoice2.setProductInfo(invoice.getProductInfo());
-		invoice2.setQty(invoice.getQty()-originQty);
+		invoice2.setQty(invoice.getQty()-originQty);// 2-5 = -3
 		invoice2.setPrice(invoice.getPrice());
 		invoiceDAO.update(invoice);
 		historyService.save(invoice, Constant.ACTION_EDIT);

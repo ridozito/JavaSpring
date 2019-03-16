@@ -55,7 +55,7 @@ public class ProductInStockService {
 				product = products.get(0);
 				log.info("update qty="+invoice.getQty()+" and price="+invoice.getPrice());
 				if(invoice.getType()==2) {
-					product.setQty(product.getQty()-invoice.getQty());
+					product.setQty(product.getQty()-invoice.getQty());//10 - 5 = 5 , 5-(-3) = 8
 				}else {
 					product.setQty(product.getQty()+invoice.getQty());
 				}
