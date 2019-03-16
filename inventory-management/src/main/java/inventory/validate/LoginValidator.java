@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 
 import inventory.model.Users;
 import inventory.service.UserService;
+import inventory.util.HashingPassword;
 @Component
 public class LoginValidator implements Validator{
 	@Autowired
@@ -27,7 +28,7 @@ public class LoginValidator implements Validator{
 		if(!StringUtils.isEmpty(user.getUserName()) && !StringUtils.isEmpty(user.getPassword())) {
 			List<Users> users = userService.findByProperty("userName", user.getUserName());
 			if(user!=null && !users.isEmpty()) {
-				if(!users.get(0).getPassword().equals(user.getPassword())) {
+				if(!users.get(0).getPassword().equals(HashingPassword.encrypt(user.getPassword()))) {
 					errors.rejectValue("password", "msg.wrong.password");
 				}
 			}else {

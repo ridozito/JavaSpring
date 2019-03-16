@@ -22,8 +22,8 @@ insert into menu(parent_id,url,name,order_index) values (0,'/product','Sáº£n 
 (2,'/history/list','Lá»‹ch sá»­ kho',4),
 
 (3,'/user/list','Danh sÃ¡ch user',1),
-(3,'/menu/list','Danh sÃ¡ch menu',1),
-(3,'/role/list','Danh sÃ¡ch quyá»�n',1),
+(3,'/menu/list','Danh sÃ¡ch menu',3),
+(3,'/role/list','Danh sÃ¡ch quyá»�n',2),
   (3, '/user/save', 'Save', -1),
   (3, '/user/edit', 'Edit', -1),
   (3, '/user/view', 'View', -1),

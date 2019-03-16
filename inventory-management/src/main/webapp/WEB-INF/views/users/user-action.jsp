@@ -69,7 +69,7 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Password <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<form:input path="password" cssClass="form-control col-md-7 col-xs-12" />
+									<form:input path="password" type="password" cssClass="form-control col-md-7 col-xs-12" />
 									<div class="has-error">
 										<form:errors path="password" cssClass="help-block"></form:errors>
 									</div>
