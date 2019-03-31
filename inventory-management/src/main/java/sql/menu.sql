@@ -27,4 +27,8 @@ insert into menu(parent_id,url,name,order_index) values (0,'/product','Sáº£n 
   (3, '/user/save', 'Save', -1),
   (3, '/user/edit', 'Edit', -1),
   (3, '/user/view', 'View', -1),
-  (3, '/user/add', 'Add', -1)
+  (3, '/user/add', 'Add', -1),
+   (3, '/role/save', 'Save', -1),
+  (3, '/role/edit', 'Edit', -1),
+  (3, '/role/view', 'View', -1),
+  (3, '/role/add', 'Add', -1)
