@@ -15,6 +15,7 @@
 
 
 				<div class="x_content">
+				<a href="<c:url value="/menu/permission"/>" class="btn btn-app"><i class="fa fa-plus"></i>Permission</a>
 					<div class="container" style="padding: 50px;">
 						<form:form modelAttribute="searchForm" cssClass="form-horizontal form-label-left" servletRelativeAction="/menu/list/1" method="POST">
 
@@ -53,20 +54,20 @@
 									<td>${menu.url }</td>
 									<c:choose>
 										<c:when test="${menu.activeFlag==1}">
-											<td>Enable</td>
+											<td><a href="javascript:void(0);" onclick="confirmChange(${menu.id},${menu.activeFlag});" class="btn btn-round btn-danger">Disable</a></td></td>
 										</c:when>
 										<c:otherwise>
-											<td>Disable</td>
+											<td><a href="javascript:void(0);" onclick="confirmChange(${menu.id},${menu.activeFlag});" class="btn btn-round btn-primary">Enable</a></td></td>
 										</c:otherwise>
 
 									</c:choose>
 									<c:forEach items="${menu.mapAuth}" var="auth">
 										<c:choose>
 											<c:when test="${auth.value==1}">
-												<td><i class="fa fa-check" style="color: green"></i></td>
+												<td class="text-center"><i class="fa fa-check" style="color: green"></i></td>
 											</c:when>
 											<c:otherwise>
-												<td><i class="fa fa-times" style="color:red;"></i></td>
+												<td class="text-center"><i class="fa fa-times" style="color:red;"></i></td>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -86,6 +87,12 @@
 	function gotoPage(page) {
 		$('#searchForm').attr('action', '<c:url value="/menu/list/"/>' + page);
 		$('#searchForm').submit();
+	}
+	function confirmChange(id,flag){
+		var msg = flag==1 ? 'Do you want disable this menu ?' : 'Do you want enable this menu ?';
+		if(confirm(msg)){
+			 window.location.href = '<c:url value="/menu/change-status/"/>'+id;
+		}
 	}
 	$(document).ready(function() {
 		processMessage();
